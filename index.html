@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Binomial — Stop wasting time writing internal docs</title>
+
+  <style>
+    @font-face {
+      font-family: 'Instrument Serif';
+      src: url('Instrument_Serif/InstrumentSerif-Regular.ttf') format('truetype');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Instrument Serif';
+      src: url('Instrument_Serif/InstrumentSerif-Italic.ttf') format('truetype');
+      font-weight: 400;
+      font-style: italic;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'PP Mondwest';
+      src: url('ppmondwest-regular.otf') format('opentype');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Roboto Condensed';
+      src: url('RobotoCondensed-Light.ttf') format('truetype');
+      font-weight: 300;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Roboto Condensed';
+      src: url('RobotoCondensed-Regular.ttf') format('truetype');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+  </style>
+
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #ffffff;
+      --border: #e0e0e0;
+      --accent: #8c52ff;
+      --accent-hover: #9d6aff;
+      --text-primary: #0a0a0a;
+      --text-secondary: #666666;
+
+      --font-serif: 'Instrument Serif', Georgia, serif;
+      --font-mono: 'PP Mondwest', monospace;
+      --font-sans: 'Roboto Condensed', system-ui, sans-serif;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-weight: 300;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── NAV ── */
+    nav {
+      padding: 28px 40px;
+      display: flex;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .logo img {
+      height: 28px;
+      width: auto;
+    }
+
+    /* ── HERO ── */
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 24px 100px;
+    }
+
+    .hero {
+      max-width: 720px;
+    }
+
+    .hero h1 {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: clamp(2.6rem, 6vw, 4.5rem);
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      font-weight: 300;
+      margin-bottom: 48px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ── EMAIL FORM ── */
+    .cta-form {
+      display: flex;
+      gap: 0;
+      max-width: 420px;
+      margin: 0 auto;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .cta-form input[type="email"] {
+      flex: 1;
+      background: #ffffff;
+      border: none;
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      font-weight: 300;
+      padding: 14px 18px;
+      outline: none;
+    }
+
+    .cta-form input[type="email"]::placeholder {
+      color: #aaaaaa;
+    }
+
+    .cta-form button {
+      background: var(--accent);
+      border: none;
+      color: #ffffff;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      padding: 14px 24px;
+      transition: background 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .cta-form button:hover {
+      background: var(--accent-hover);
+    }
+
+    .cta-form button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    /* ── FEEDBACK MESSAGES ── */
+    .form-message {
+      margin-top: 16px;
+      font-size: 0.9rem;
+      min-height: 1.4em;
+    }
+
+    .form-message.success {
+      color: #5a9e7a;
+    }
+
+    .form-message.error {
+      color: #c0392b;
+    }
+
+    @media (max-width: 480px) {
+      nav {
+        padding: 20px 24px;
+      }
+
+      .cta-form {
+        flex-direction: column;
+        border-radius: 8px;
+      }
+
+      .cta-form input[type="email"],
+      .cta-form button {
+        width: 100%;
+        border-radius: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="logo" href="/">
+      <img src="Binomial Logo.png" alt="Binomial" />
+    </a>
+  </nav>
+
+  <!-- HERO -->
+  <main>
+    <div class="hero">
+      <h1>Stop wasting time writing internal docs.</h1>
+
+      <form class="cta-form" id="betaForm" novalidate>
+        <input type="email" id="emailInput" name="email" placeholder="your@email.com" autocomplete="email" />
+        <button type="submit" id="submitBtn">Join Beta</button>
+      </form>
+      <div class="form-message" id="formMessage" aria-live="polite"></div>
+    </div>
+  </main>
+
+  <script>
+    // ─── CONFIGURATION ───────────────────────────────────────────────────────
+    // Paste your Google Apps Script web app URL here after deploying it.
+    // Instructions: see SETUP.md or the comment block below.
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwDmoEkLCQgt2Yk3ZKNtSf9I6f_tAclSOiLo9UA8C1iENoMrNu2_eGBrr_wfzn9LVod/exec';
+    // ─────────────────────────────────────────────────────────────────────────
+
+    const form = document.getElementById('betaForm');
+    const input = document.getElementById('emailInput');
+    const btn = document.getElementById('submitBtn');
+    const message = document.getElementById('formMessage');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const email = input.value.trim();
+      const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+      if (!valid) {
+        message.textContent = 'Enter a valid email address.';
+        message.className = 'form-message error';
+        input.focus();
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'Joining…';
+      message.textContent = '';
+      message.className = 'form-message';
+
+      try {
+        if (location.protocol !== 'file:') {
+          // no-cors: response is opaque but the request goes through fine on a live site.
+          await fetch(APPS_SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, timestamp: new Date().toISOString() }),
+          });
+        }
+
+        message.textContent = "You're on the list. We'll be in touch.";
+        message.className = 'form-message success';
+        input.value = '';
+      } catch (err) {
+        message.textContent = 'Something went wrong. Please try again.';
+        message.className = 'form-message error';
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Join Beta';
+      }
+    });
+  </script>
+
+</body>
+
+</html>
