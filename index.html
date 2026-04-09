@@ -237,7 +237,7 @@
 
       <form class="cta-form" id="betaForm" novalidate>
         <input type="email" id="emailInput" name="email" placeholder="your@email.com" autocomplete="email" />
-        <button type="submit" id="submitBtn">Join Beta</button>
+        <button type="submit" id="submitBtn">Learn more</button>
       </form>
       <div class="form-message" id="formMessage" aria-live="polite"></div>
     </div>
@@ -284,7 +284,7 @@
           });
         }
 
-        message.textContent = "You're on the list. We'll be in touch.";
+        message.textContent = "we'll be in touch";
         message.className = 'form-message success';
         input.value = '';
       } catch (err) {
@@ -292,7 +292,7 @@
         message.className = 'form-message error';
       } finally {
         btn.disabled = false;
-        btn.textContent = 'Join Beta';
+        btn.textContent = 'Learn more';
       }
     });
   </script>
