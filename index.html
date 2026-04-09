@@ -140,24 +140,27 @@
     /* ── EMAIL FORM ── */
     .cta-form {
       display: flex;
-      gap: 0;
+      gap: 8px;
       max-width: 420px;
       margin: 0 auto;
-      border-radius: 8px;
-      overflow: hidden;
-      border: 1px solid var(--border);
     }
 
     .cta-form input[type="email"] {
       flex: 1;
       background: #ffffff;
-      border: none;
+      border: 1px solid var(--border);
+      border-radius: 6px;
       color: var(--text-primary);
       font-family: var(--font-sans);
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       font-weight: 300;
-      padding: 14px 18px;
+      padding: 11px 16px;
       outline: none;
+      transition: border-color 0.15s ease;
+    }
+
+    .cta-form input[type="email"]:focus {
+      border-color: #aaaaaa;
     }
 
     .cta-form input[type="email"]::placeholder {
@@ -165,25 +168,26 @@
     }
 
     .cta-form button {
-      background: var(--accent);
+      background: #1a1a1a;
       border: none;
+      border-radius: 6px;
       color: #ffffff;
       cursor: pointer;
       font-family: var(--font-sans);
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       font-weight: 400;
-      letter-spacing: 0.02em;
-      padding: 14px 24px;
-      transition: background 0.15s ease;
+      letter-spacing: 0.01em;
+      padding: 11px 20px;
+      transition: opacity 0.15s ease;
       white-space: nowrap;
     }
 
     .cta-form button:hover {
-      background: var(--accent-hover);
+      opacity: 0.85;
     }
 
     .cta-form button:disabled {
-      opacity: 0.6;
+      opacity: 0.5;
       cursor: not-allowed;
     }
 
